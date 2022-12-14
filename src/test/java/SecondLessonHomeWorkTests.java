@@ -34,4 +34,25 @@ public class SecondLessonHomeWorkTests {
         String locationHeader = response.getHeader("Location");
         System.out.println(locationHeader);
     }
+
+    @Test
+    public void thirdHomeworkTest() {
+        String link = "https://playground.learnqa.ru/api/long_redirect";
+
+        while (link != null) {
+            Response response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .when()
+                    .get(link)
+                    .andReturn();
+
+            String locationHeader = response.getHeader("Location");
+            System.out.println(locationHeader);
+            link = locationHeader;
+            int statusCode = response.getStatusCode();
+            System.out.println(statusCode);
+        }
+    }
 }
