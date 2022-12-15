@@ -1,8 +1,6 @@
 import io.restassured.RestAssured;
-import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -101,7 +99,7 @@ public class SecondLessonHomeWorkTests {
         if (resultValue == null) {
             System.out.println("The key 'result' is absent");
         } else {
-            System.out.println(resultValue);
+            System.out.println("result=" + resultValue);
         }
     }
 }
