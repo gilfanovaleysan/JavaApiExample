@@ -101,7 +101,7 @@ public class SecondLessonHomeWorkTests {
         if (resultValue == null) {
             System.out.println("The key 'result' is absent");
         } else {
-            System.out.println(resultValue);
+            System.out.println("result=" + resultValue);
         }
     }
 }
