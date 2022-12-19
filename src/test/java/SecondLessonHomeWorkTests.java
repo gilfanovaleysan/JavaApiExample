@@ -63,6 +63,7 @@ public class SecondLessonHomeWorkTests {
                 .andReturn();
         createTask.print();
         String responseToken = createTask.getBody().path("token");
+        int responseSeconds = createTask.getBody().path("seconds");
         Map<String, String> data = new HashMap<>();
         data.put("token", responseToken);
 
@@ -80,7 +81,9 @@ public class SecondLessonHomeWorkTests {
             System.out.println("The key 'status' is incorrect");
         }
 
-        Thread.sleep(20000);
+        String responseSeconds2 = responseSeconds + "000";
+        System.out.println(responseSeconds2);
+        Thread.sleep(Long.parseLong(responseSeconds2));
 
         Response checkReadyTask = RestAssured
                 .given()
