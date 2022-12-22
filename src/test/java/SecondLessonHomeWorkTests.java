@@ -3,8 +3,14 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class SecondLessonHomeWorkTests {
 
@@ -103,6 +109,36 @@ public class SecondLessonHomeWorkTests {
             System.out.println("The key 'result' is absent");
         } else {
             System.out.println("result=" + resultValue);
+        }
+    }
+
+    @Test
+    public void fifthHomeworkTest() throws IOException {
+        List<String> passwords = Files.readAllLines(Paths.get("src/test/resources/forHomework/passwords"));
+        for (String password : passwords) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("login", "super_admin");
+            data.put("password", password);
+            Response response = RestAssured
+                    .given()
+                    .body(data)
+                    .post("https://playground.learnqa.ru/ajax/api/get_secret_password_homework")
+                    .andReturn();
+
+            String responseCookie = response.getCookie("auth_cookie");
+            Map<String, String> cookies = new HashMap<>();
+            cookies.put("auth_cookie", responseCookie);
+            Response responseForCheck = RestAssured
+                    .given()
+                    .cookies(cookies)
+                    .when()
+                    .get("https://playground.learnqa.ru/api/check_auth_cookie")
+                    .andReturn();
+            String stringResponse = responseForCheck.asString();
+
+            if (stringResponse.equals("You are authorized")) {
+                System.out.println(stringResponse + ". The correct password is: " + password);
+            }
         }
     }
 }
