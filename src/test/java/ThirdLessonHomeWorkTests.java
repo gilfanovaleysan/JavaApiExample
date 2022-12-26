@@ -1,10 +1,19 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ThirdLessonHomeWorkTests {
+
+    @Test
+    public void firstHomeworkTest() {
+        String generatedString = RandomStringUtils.randomAlphabetic(1, 30);
+        System.out.println(generatedString);
+        assertTrue(generatedString.length()>15, "Text is shorter than 15 characters");
+    }
 
     @Test
     public void secondHomeworkTest() {
