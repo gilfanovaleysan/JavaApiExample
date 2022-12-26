@@ -1,3 +1,5 @@
+package otherTests;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -78,7 +80,7 @@ public class ThirdLessonHomeWorkTests {
                 arguments("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                         + "Chrome/91.0.4472.77 Safari/537.36 Edg/91.0.100.0", "Web", "Chrome", "No"),
                 arguments("Mozilla/5.0 (iPad; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)"
-                        + " Version/13.0.3 Mobile/15E148 Safari/604.1", "Mobile", "browser", "iPhone")
+                        + " Version/13.0.3 Mobile/15E148 Safari/604.1", "Mobile", "No", "iPhone")
         );
     }
 
