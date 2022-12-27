@@ -85,9 +85,9 @@ public class UserEditTest extends BaseTestCase {
         JsonPath responseCreateAuth = apiCoreRequests.registerUserRequest("https://playground.learnqa.ru/api/user/", userData);
 
         //GENERATE EDITED USER
-        Map<String, String> userDataForGeneratedUser = DataGenerator.getRegistrationData();
+        Map<String, String> userDataForEditedUser = DataGenerator.getRegistrationData();
         JsonPath responseCreateAuthForEditedUser = apiCoreRequests
-                .registerUserRequest("https://playground.learnqa.ru/api/user/", userDataForGeneratedUser);
+                .registerUserRequest("https://playground.learnqa.ru/api/user/", userDataForEditedUser);
 
         String userId = responseCreateAuthForEditedUser.getString("id");
 
@@ -101,8 +101,8 @@ public class UserEditTest extends BaseTestCase {
 
         //LOGIN WITH EDITED USER
         Map<String, String> authDataForEditedUser = new HashMap<>();
-        authDataForEditedUser.put("email", userDataForGeneratedUser.get("email"));
-        authDataForEditedUser.put("password", userDataForGeneratedUser.get("password"));
+        authDataForEditedUser.put("email", userDataForEditedUser.get("email"));
+        authDataForEditedUser.put("password", userDataForEditedUser.get("password"));
 
         Response responseGetAuthForEditedUser = apiCoreRequests
                 .makePostRequest("https://playground.learnqa.ru/api/user/login", authDataForEditedUser);
