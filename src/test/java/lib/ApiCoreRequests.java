@@ -89,4 +89,14 @@ public class ApiCoreRequests {
                 .post(url)
                 .andReturn();
     }
+
+    @Step("Make a GET-request of getting user data with token and auth cookie")
+    public Response makeGetUserDataRequest(String url, String token, String cookie) {
+        return given()
+                .filter(new AllureRestAssured())
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .get(url)
+                .andReturn();
+    }
 }
