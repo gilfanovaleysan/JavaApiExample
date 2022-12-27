@@ -3,6 +3,7 @@ package lib;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.Header;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -46,6 +47,15 @@ public class ApiCoreRequests {
                 .body(authData)
                 .post(url)
                 .andReturn();
+    }
+
+    @Step("Make a POST-request with user data")
+    public JsonPath registerUserRequest(String url, Map<String, String> userData) {
+        return given()
+                .filter(new AllureRestAssured())
+                .body(userData)
+                .post(url)
+                .jsonPath();
     }
 
     @Step("Make a POST-request with incorrect email")
@@ -97,6 +107,26 @@ public class ApiCoreRequests {
                 .header(new Header("x-csrf-token", token))
                 .cookie("auth_sid", cookie)
                 .get(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request of editing user w/o auth")
+    public Response makePutEditUserWithoutAuthRequest(String url, Map<String, String> editData) {
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .put(url)
+                .andReturn();
+    }
+
+    @Step("Make a PUT-request of editing user with auth")
+    public Response makePutEditUserWithAuthRequest(String url, Map<String, String> editData, String token, String cookie) {
+        return given()
+                .filter(new AllureRestAssured())
+                .body(editData)
+                .header(new Header("x-csrf-token", token))
+                .cookie("auth_sid", cookie)
+                .put(url)
                 .andReturn();
     }
 }
